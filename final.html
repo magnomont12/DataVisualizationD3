@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Trabalho Final</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+
+   <!-- Make sure you put this AFTER Leaflet's CSS -->
+   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
+
+    <link rel="stylesheet" type="text/css" href="http://dc-js.github.io/dc.js/css/dc.css" />
+    <script type="text/javascript" async="" src="http://www.google-analytics.com/ga.js"></script>
+    <script src="http://dc-js.github.io/dc.js/js/d3.js"></script>
+    <script src="http://dc-js.github.io/dc.js/js/crossfilter.js"></script>
+    <script src="http://dc-js.github.io/dc.js/js/dc.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="extraFunctions.js"></script>
+    <script src="clearDataset.js"></script>
+    <script src="graphs.js"></script>
+    <style>
+      #mapid {
+        width: 650px;
+        height: 480px;
+      }
+      h4 span {
+        font-size:14px;
+        font-weight:normal;
+      }
+      img {
+          max-width:1000px;
+          max-height:1000px;
+          width: auto;
+          height: auto;
+      }
+
+    </style>
+</head>
+
+<body>
+    <main role="main" class="container">
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Relatório sobre a campanha de vacinação mês de fevereiro</h1>
+          <p class="lead text-muted">Iremos apresentar um relatório sobre a campanha de vacinação no mês de fevereiro, utilizando
+            os dados do Governo que você pode encontrar <a href="https://dados.gov.br/dataset/covid-19-vacinacao">aqui</a>. Os dados foram baixados no
+          dia 05/03/2021, então o site atual já pode ter atualizado a base.</p>
+            <p class = "lead text-muted">
+              Depois de apresentarmos alguns insights que tivemos enquanto olhavamos os gráficos, iremos deixar uma sessão para que você
+              possa interagir com os gráficos e construir seu próprio relatório, mais específico, caso necessário.
+            </p>
+        </div>
+      </section>
+
+      <hr class="featurette-divider">
+      <div class= "row featurette">
+        <div class = "col-md-7">
+          <h2 class = "featurette-heading">Porcentagem de vacinas por Gênero</h2>
+          <p class= "lead">Em números absolutos no mês de fevereiro foram vacinadas 839523 pessoas. Dessas 33% do sexo biológico masculino e 67% feminino.</p>
+        </div>
+        <div class = "col-md-5">
+          <img class = "featurette-image img-fluid mx-auto" src = "Images/GeneroTotal.PNG">
+        </div>
+      </div>
+      <hr class="featurette-divider">
+      <div class= "row featurette">
+        <div class = "col-md-7">
+          <h2 class = "featurette-heading">Número abusoluto de vacinação por cor</h2>
+          <p class= "lead">Observamos que pessoas brancas tiveram um maior indice de vacinação.
+            Pessoas pardas e pessoas que não identificaram sua cor, tiveram números bem similares.
+            Enquanto isso, temos um grupo menor de pessoas amarelas, pretas e indígenas se vacinando. Somando os valores absolutos das três categorias, não chega ao número de pessoas brancas vacinadas.
+          </p>
+        </div>
+        <div class = "col-md-5">
+          <img class = "featurette-image img-fluid mx-auto" src = "Images/VacinacaoCor.PNG">
+        </div>
+      </div>
+      <hr class="featurette-divider">
+      <div class= "row featurette">
+        <div class = "col-md-7">
+          <h2 class = "featurette-heading">Tipos de Vacina e Faixa Etária</h2>
+          <p class= "lead">Em ambos os gráficos percebmos dois picos de vacinação.
+            O primeiro iniciando dia 01 até 05 e o segundo iniciando dia 08 e durando até dia 11.
+          </p>
+          <p class = "lead">O Primeiro tivemos mais utilização da vacina Covishield e no segundo tivemos uma maior utilização da Sinovac/Butantan.</p>
+          <p class = lead> Já em relação as faixas etárias, vemos uma maior taxa de vacinação em pessoas de 20 a 54 anos, juntamente com
+            faixas etárias não informadas. 
+          </p>
+        </div>
+        <div class = "col-md-5">
+          <img class = "featurette-image img-fluid mx-auto" src = "Images/TipoVacina.PNG">
+          <img class = "featurette-image img-fluid mx-auto" src = "Images/FaixaEtaria.PNG">
+        </div>
+      </div>
+      <hr class="featurette-divider">
+      <div class= "row featurette">
+        <div class = "col-md-7">
+          <h2 class = "featurette-heading">Vacinas na região Norte e Nordeste do Brasil</h2>
+          <p class = "lead">Apenas algumas curiosidades. Anteriormente vimos que a maior parte da população vacinada se considerava da cor branca e parda.
+            Quando olhamos apenas para o Norte e Nordeste do Brasil, vemos que as pessoas pardas e amarelas são a grande maioria vacinada. Vale ressaltar
+          que segundo o censo de 2010 do IBGE a distribuição de cor dessas regiões é: </p>
+          <ul>
+            <li class = "lead">Branca: 23,2%</li>
+            <li class = "lead">Preta: 6,5%</li>
+            <li class = "lead">Parda: 67,2%</li>
+            <li class = "lead">Amarela: 1,1%</li>
+            <li class = "lead">Indígena: 1,9%</li>
+          </ul>
+          <ul>
+            <li class = "lead">Branca: 29,2%</li>
+            <li class = "lead">Preta: 9,4%</li>
+            <li class = "lead">Parda: 59,8%</li>
+            <li class = "lead">Amarela: 1,2%</li>
+            <li class = "lead">Indígena: 0,4%</li>
+          </ul>
+          <p class = lead> Na região Norte e Nordeste, respectivamente.</p>
+        </div>
+        <div class = "col-md-5">
+          <img class = "featurette-image img-fluid mx-auto" src = "Images/MapaNorte.PNG">
+          <img class = "featurette-image img-fluid mx-auto" src = "Images/CorNorte.PNG">
+        </div>
+      </div>
+      <hr class="featurette-divider">
+      <div class= "row featurette">
+        <div class = "col-md-7">
+          <h2 class = "featurette-heading">Vacinas na região Centro-Oeste, Sudeste e Sul do Brasil</h2>
+          <p class = "lead">Já em relação as regiões Centro-Oeste, Sudeste e Sul apenas as classes de pessoas brancas e dados sem informação 
+            possuem valores acima de 100.000, também vale ressaltar a distribuição de cores segundo o censo de 2010 do IBGE: </p>
+          <ul>
+            <li class = "lead">Branca: 41,5%</li>
+            <li class = "lead">Preta: 6,6%</li>
+            <li class = "lead">Parda: 49,4%</li>
+            <li class = "lead">Amarela: 1,5%</li>
+            <li class = "lead">Indígena: 0,9%</li>
+          </ul>
+          <ul>
+            <li class = "lead">Branca: 54,9%</li>
+            <li class = "lead">Preta: 7,8%</li>
+            <li class = "lead">Parda: 36%</li>
+            <li class = "lead">Amarela: 1,1%</li>
+            <li class = "lead">Indígena: 0,1%</li>
+          </ul>
+          <ul>
+            <li class = "lead">Branca: 78,3%</li>
+            <li class = "lead">Preta: 4%</li>
+            <li class = "lead">Parda: 16,7%</li>
+            <li class = "lead">Amarela: 0,7%</li>
+            <li class = "lead">Indígena: 0,3%</li>
+          </ul>
+          <p class = lead> Na região Centro-Oeste, Suldeste e Sul respectivamente.</p>
+        </div>
+        <div class = "col-md-5">
+          <img class = "featurette-image img-fluid mx-auto" src = "Images/MapSul.PNG">
+          <img class = "featurette-image img-fluid mx-auto" src = "Images/CorSul.PNG">
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h5 class="h3 mb-0">Brinque com os gráficos!</h5>
+        </div>
+        <div class="card-body">
+          <div class="chart">
+            <div>
+              <h2 class= "featurette-heading">Que tal você mesmo brincar agora?</h2>
+              <p class = "lead"> Você pode interagir com os gráficos e criar sua própria história! Compartilhe e informe com as pessoas próximas a você!</p>
+            </div>
+            <div id='pieFM'>
+              <h4 class= "featurette-heading"> Número de vacinas por gênero (%) </h4>
+              <p class = "lead">Com esse gráfico você pode ter insights sobre a distribuição do número de vacinas entre mulheres e homens.</p>
+              <p class = "lead">Os dados são contados como dose única, então o número pode não ser igual ao total de pessoas vacinadas, dependendo do regime específico de dosagem</p>
+            </div>
+            <div id='cor-chart'>
+              <h4 class= "featurette-heading"> Número de vacinas por cor </h4>
+              <p class = "lead">Com esse gráfico você pode conseguir informações sobre qual grupo tem um maior número de pessoas vacinadas.</p>
+              <p class = "lead">Os dados são contados como dose única, então o número pode não ser igual ao total de pessoas vacinadas, dependendo do regime específico de dosagem</p>
+            </div>
+            <div id='compositeChart'>
+              <h4 class= "featurette-heading"> Período e Tipo de Vacina </h4>
+              <p class = "lead">Você pode ver qual vacina foi mais utilizada e em quais datas teve o maior número de vacinação</p>
+              <p class = "lead">Os dados são contados como dose única, então o número pode não ser igual ao total de pessoas vacinadas, dependendo do regime específico de dosagem</p>
+            </div>
+            <div id='heatmap'>
+              <h4 class= "featurette-heading"> Número de vacinas por faixa etária </h4>
+              <p class = "lead">Você pode descobrir qual faixa etária foi mais vacinada e o período que teve maior vacinação para.</p>
+              <p class = "lead">Os dados são contados como dose única, então o número pode não ser igual ao total de pessoas vacinadas, dependendo do regime específico de dosagem</p>
+            </div>
+            <div id='map-chart'>
+              <h4 class= "featurette-heading"> Quantidade da população vacinada no estado (%) </h4>
+              <p class = "lead">Você pode ver a porcentagem de pessoas que foram vacinadas por estado no mês de fevereiro e o total de pessoas já vacinada até o final de fevereiro.</p>
+              <p class = "lead">Os dados são contados como dose única, então o número pode não ser igual ao total de pessoas vacinadas, dependendo do regime específico de dosagem</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    </main>
+</body>
